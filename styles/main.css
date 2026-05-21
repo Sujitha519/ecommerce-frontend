@@ -605,3 +605,215 @@ body {
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
 }
+/* ==================================================== */
+/* MODULE 4 SUBTASK 2: CART PAGE CONTAINER LAYOUTS     */
+/* ==================================================== */
+
+.cart-page-container {
+    padding: 40px 5%;
+    min-height: 80vh;
+    background-color: #fcfcfc;
+}
+
+.cart-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+/* Two-column responsive breakdown grid layout */
+.cart-layout-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.cart-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Individual Cart Card Row Structure Layout */
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    gap: 20px;
+}
+
+.cart-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-details h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.cart-item-meta {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    font-weight: 700;
+    color: #ff5722;
+    font-size: 16px;
+}
+
+/* Remove Trash Action Element Icon */
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: #e53935;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s;
+}
+
+.remove-item-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Right Column Order Summary Widget Card Styling */
+.order-summary-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+.order-summary-card h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 15px;
+    color: #555;
+}
+
+.total-row {
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+    margin-top: 15px;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 14px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.2s;
+}
+
+.checkout-btn:hover {
+    background: #ff5722;
+}
+
+.continue-shopping-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+}
+
+.continue-shopping-link:hover {
+    color: #ff5722;
+}
+
+.empty-cart-msg {
+    text-align: center;
+    padding: 40px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+}
+
+/* Screen Break Responsive Adapters */
+@media (max-width: 992px) {
+    .cart-layout-grid {
+        grid-template-columns: 1fr; /* Drop into single stacked column */
+    }
+}
+/* ==================================================== */
+/* NAVBAR CART ICON STYLE FIX                           */
+/* ==================================================== */
+
+/* Ensures the navbar space separates the logo and the cart icon */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.navbar .logo a {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+}
+
+/* The Cart Icon Container */
+.cart-icon {
+    position: relative;
+    font-size: 22px; /* Makes the basket look crisp and readable */
+    cursor: pointer;
+}
+
+.cart-icon a {
+    color: #333; /* Dark gray icon color */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.cart-icon a:hover {
+    color: #ff5722; /* Turns orange when you hover over it */
+}
+
+/* The Little Red Counter Badge */
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: #ff5722; /* High-contrast alert orange */
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 50%; /* Makes it a perfect notification circle */
+    text-align: center;
+    min-width: 15px;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart Basket Summary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background-color: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <div class="logo">
+                <a href="index.html" style="font-size: 24px; font-weight: 700; color: #333; text-decoration: none;">🛍️ MyStore</a>
+            </div>
+            <div class="cart-link-container">
+                <a href="./cart.html" style="font-size: 16px; font-weight: 600; color: #ff5722; text-decoration: none; border: 1px solid #ff5722; padding: 8px 15px; border-radius: 4px; display: inline-block;">
+                    <i class="fa-solid fa-basket-shopping"></i> Basket List (<span id="navCartBadge">0</span>)
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="cart-page-container" style="padding: 40px 5%;">
+        <h1 class="cart-title" style="margin-bottom:30px;">Your Shopping Cart Basket</h1>
+        
+        <div class="cart-layout-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: start;">
+            <div class="cart-items-list" id="cartItemsContainer" style="display: flex; flex-direction: column; gap: 20px;">
+                </div>
+
+            <div class="order-summary-card" style="background: #fff; border: 1px solid #eee; border-radius: 6px; padding: 25px;">
+                <h2 style="font-size: 20px; margin-bottom: 20px;">Order Summary Card</h2>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;" class="summary-row">
+                    <span>Total Selection Count:</span>
+                    <span id="summaryItemCount">0 items</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;" class="summary-row">
+                    <span>Shipping Charges:</span>
+                    <span style="color: green; font-weight: 600;">FREE SHIPPING</span>
+                </div>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 18px; font-weight: bold;" class="summary-row total-row">
+                    <span>Estimated Checkout Total Bill:</span>
+                    <span id="summaryOrderTotal">$0.00</span>
+                </div>
+                <button id="checkoutBtn" class="checkout-btn" style="width: 100%; padding: 14px; background: #333; color: #fff; border: none; border-radius: 4px; font-weight: 600; font-size: 16px; cursor: pointer; margin-top: 15px;">Proceed to Secure Checkout</button>
+                <a href="index.html" class="continue-shopping-link" style="display: block; text-align: center; margin-top: 15px; color: #ff5722; text-decoration: none; font-size: 14px;"><i class="fa-solid fa-arrow-left"></i> Continue Shopping Stock Items</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="scripts/cart.js"></script>
+</body>
+</html>

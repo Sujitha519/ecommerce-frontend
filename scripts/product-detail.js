@@ -1,158 +1,81 @@
-// ====================================================
-// MODULE 3 SUBTASK 1: PRODUCT DETAIL LOGIC CONTROLLER
-// ====================================================
-
-const detailView = document.getElementById('detailView');
-const navCartBadge = document.getElementById('navCartBadge');
-
-// 1. Sync counter badge from storage immediately on page initialization
-function syncCartBadge() {
-    const savedCount = localStorage.getItem('cartCount') || 0;
-    if (navCartBadge) {
-        navCartBadge.textContent = savedCount;
-    }
-}
-
-// 2. Extract specific query param unique 'id' straight from window address string bar
-function getProductIdFromURL() {
-    const urlParameters = new URLSearchParams(window.location.search);
-    return urlParameters.get('id'); // returns e.g., "5"
-}
-
-// 3. Fetch single target entity data model straight from FakeStore endpoint mapping
-async function loadSingleProductDetails() {
-    const productId = getProductIdFromURL();
-    
-    if (!productId) {
-        detailView.innerHTML = `<p class="error-message">Error: No valid product ID detected in your URL parameters.</p>`;
-        return;
-    }
-
-    try {
-        const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
-        if (!response.ok) throw new Error('Failed to retrieve matching query entity metadata');
-        
-        const targetProduct = await response.json();
-        
-        // Construct detailed split interface architecture block patterns injection mapping
-        renderProductTemplate(targetProduct);
-
-    } catch (err) {
-        console.error(err);
-        detailView.innerHTML = `<p class="error-message">Oops! Could not find the selected product details. Please return home and try again.</p>`;
-    }
-}
-
-// 4. Construct detailed layouts structures dynamically inside DOM trees safely
-// Keep the top parts of your script (syncCartBadge, getProductIdFromURL, loadSingleProductDetails) exactly the same!
-
-// Global memory states for active calculation monitoring
-let singleItemPrice = 0;
+// Local variable tracking context configurations parameters fields 
 let productQuantity = 1;
+let singleItemPrice = 49.99;
 
-// 4. Construct detailed layouts structures dynamically inside DOM trees safely
-function renderProductTemplate(item) {
-    // Save base decimal cost value into active memory trackers
-    singleItemPrice = item.price;
-    productQuantity = 1; 
+// Mock backup profile match catalog list matching our homepage setup dataset indexes mapping
+const backupCatalogDB = {
+    "101": { title: "Premium Cotton Hoodie", price: 49.99, image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500" },
+    "102": { title: "Classic Denim Jacket", price: 65.00, image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=500" },
+    "103": { title: "Minimalist Leather Watch", price: 120.00, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500" },
+    "104": { title: "Athletic Running Sneakers", price: 85.50, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500" }
+};
 
-    detailView.innerHTML = `
-        <div class="detail-wrapper">
-            <div class="detail-img-box">
-                <img src="${item.image}" alt="${item.title}" id="productZoomImg">
-            </div>
-            
-            <div class="detail-info-box">
-                <span class="detail-category">${item.category}</span>
-                <h1>${item.title}</h1>
-                
-                <p class="detail-price" id="totalPriceDisplay">$${singleItemPrice.toFixed(2)}</p>
-                <p class="detail-desc">${item.description}</p>
-                
-                <div class="selector-item">
-                    <label for="productSize">Select Variation Size:</label>
-                    <select id="productSize" class="size-dropdown">
-                        <option value="S">Small (S)</option>
-                        <option value="M" selected>Medium (M)</option>
-                        <option value="L">Large (L)</option>
-                        <option value="XL">Extra Large (XL)</option>
-                    </select>
-                </div>
-
-                <div class="selector-item">
-                    <label>Quantity:</label>
-                    <div class="quantity-wrapper">
-                        <button class="qty-btn" id="minusBtn" type="button">−</button>
-                        <div class="qty-number" id="qtyCountDisplay">1</div>
-                        <button class="qty-btn" id="plusBtn" type="button">+</button>
-                    </div>
-                </div>
-                
-                <div class="action-btn-group">
-                    <button class="add-bag-btn" id="addBtn">Add to Cart Bag</button>
-                    <a href="index.html" class="back-store-btn"><i class="fa-solid fa-arrow-left"></i> Back to Shop</a>
-                </div>
-            </div>
-        </div>
-    `;
-
-    // Initialize interactive structural event handlers hooks
-    setupInteractiveControlListeners();
+function syncCartBadge() {
+    const navCartBadge = document.getElementById('navCartBadge');
+    if (!navCartBadge) return;
+    const cartItemsList = JSON.parse(localStorage.getItem('cartItemsArray')) || [];
+    const totalQuantityCount = cartItemsList.reduce((acc, item) => acc + item.quantity, 0);
+    navCartBadge.textContent = totalQuantityCount;
 }
 
-// 5. Connect interaction calculations pipeline flows
-function setupInteractiveControlListeners() {
-    const plusBtn = document.getElementById('plusBtn');
-    const minusBtn = document.getElementById('minusBtn');
-    const qtyCountDisplay = document.getElementById('qtyCountDisplay');
-    const totalPriceDisplay = document.getElementById('totalPriceDisplay');
-    const addBtn = document.getElementById('addBtn');
-
-    // PLUS BUTTON CLICK LOGIC
-    plusBtn.addEventListener('click', () => {
-        productQuantity += 1;
-        qtyCountDisplay.textContent = productQuantity;
-        updateDynamicPriceView(totalPriceDisplay);
-    });
-
-    // MINUS BUTTON CLICK LOGIC (Prevents falling below 1 unit item)
-    minusBtn.addEventListener('click', () => {
-        if (productQuantity > 1) {
-            productQuantity -= 1;
-            qtyCountDisplay.textContent = productQuantity;
-            updateDynamicPriceView(totalPriceDisplay);
-        }
-    });
-
-    // SUBMIT ADD TO CART OPERATIONS CLICK
-    addBtn.addEventListener('click', () => {
-        const selectedSize = document.getElementById('productSize').value;
-        addToCartCountTracker(selectedSize);
-    });
-}
-
-// 6. Dynamic calculator to multiply configuration costs instantly
-function updateDynamicPriceView(displayElement) {
-    const runningTotalSum = singleItemPrice * productQuantity;
-    displayElement.textContent = `$${runningTotalSum.toFixed(2)}`;
-}
-
-// 7. Store data persistently inside browser LocalStorage memory across sessions
-function addToCartCountTracker(sizeSelection) {
-    // Fetch previous values or instantiate zero index parameters
-    let currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
+function loadDetailProfileData() {
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id') || "101"; // Fallback to 101 if no id param present
     
-    // Add the total calculated quantity number chosen by user selection loop
-    currentCount += productQuantity;
-    
-    localStorage.setItem('cartCount', currentCount);
-    syncCartBadge(); // Update navigation header bubble count circle element
-    
-    alert(`Success! Added (${productQuantity}) items in Size [${sizeSelection}] smoothly into your shopping container tracking logs.`);
+    const targetProduct = backupCatalogDB[productId];
+    if (targetProduct) {
+        document.getElementById('detailTitle').textContent = targetProduct.title;
+        document.getElementById('detailPrice').textContent = `$${targetProduct.price.toFixed(2)}`;
+        document.getElementById('productZoomImg').setAttribute('src', targetProduct.image);
+        singleItemPrice = targetProduct.price;
+    }
 }
 
-// Fire initialization event parameters execution workflows
-document.addEventListener('DOMContentLoaded', () => {
+window.adjustAmountInputCounter = function(val) {
+    productQuantity += val;
+    if (productQuantity < 1) productQuantity = 1; // Block zero or negative selection entries
+    document.getElementById('quantityDisplayNumber').textContent = productQuantity;
+};
+
+function executeAddToCartRoutine() {
+    const sizeSelection = document.getElementById('sizeDropdown').value;
+    let cartItemsList = JSON.parse(localStorage.getItem('cartItemsArray')) || [];
+    
+    const params = new URLSearchParams(window.location.search);
+    const activeProductId = params.get('id') || "101";
+
+    const productSnapshot = {
+        id: activeProductId,
+        title: document.getElementById('detailTitle').textContent,
+        price: singleItemPrice,
+        image: document.getElementById('productZoomImg').getAttribute('src'),
+        size: sizeSelection,
+        quantity: productQuantity
+    };
+
+    // Consolidated Merge Verification Loop Logic Check: Merge quantities if identical product and size
+    const duplicateMatchIndex = cartItemsList.findIndex(item => 
+        item.id === productSnapshot.id && item.size === productSnapshot.size
+    );
+
+    if (duplicateMatchIndex !== -1) {
+        cartItemsList[duplicateMatchIndex].quantity += productSnapshot.quantity;
+    } else {
+        cartItemsList.push(productSnapshot);
+    }
+
+    localStorage.setItem('cartItemsArray', JSON.stringify(cartItemsList));
     syncCartBadge();
-    loadSingleProductDetails();
+    
+    alert(`Added ${productQuantity}x "${productSnapshot.title}" (Size: ${sizeSelection}) to your cart bag list!`);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadDetailProfileData();
+    syncCartBadge();
+    
+    const addCartBtn = document.getElementById('addCartBtn');
+    if (addCartBtn) {
+        addCartBtn.addEventListener('click', executeAddToCartRoutine);
+    }
 });

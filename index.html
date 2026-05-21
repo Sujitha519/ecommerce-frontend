@@ -3,56 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Frontend</title>
+    <title>E-Commerce Storefront</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="nav-logo">
-            <a href="#">Shop<span>Easy</span></a>
-        </div>
-
-        <div class="nav-search">
-            <input type="text" placeholder="Search for products...">
-            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-
-        <nav class="nav-menu" id="navMenu">
-            <a href="#" class="nav-link active">Home</a>
-            <a href="#" class="nav-link">Products</a>
-            <a href="#" class="nav-link">About</a>
-            <a href="#" class="nav-link">Contact</a>
+    <header>
+        <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background-color: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <div class="logo">
+                <a href="index.html" style="font-size: 24px; font-weight: 700; color: #333; text-decoration: none;">🛍️ MyStore</a>
+            </div>
+            
+            <div class="cart-link-container">
+                <a href="./cart.html" style="font-size: 16px; font-weight: 600; color: #ff5722; text-decoration: none; border: 1px solid #ff5722; padding: 8px 15px; border-radius: 4px; display: inline-block;">
+                    <i class="fa-solid fa-basket-shopping"></i> Go To My Cart (<span id="navCartBadge">0</span>)
+                </a>
+            </div>
         </nav>
 
-        <div class="nav-icons">
-            <a href="#" class="cart-icon">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span class="cart-badge">3</span>
-            </a>
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
+        <nav class="nav-menu" style="padding: 10px 5%; background: #f8f9fa; display: flex; gap: 20px;">
+            <a href="index.html" style="color: #ff5722; text-decoration: none; font-weight: 600;">Home</a>
+            <a href="#" style="color: #666; text-decoration: none; font-weight: 500;">Products</a>
+            <a href="#" style="color: #666; text-decoration: none; font-weight: 500;">About</a>
+            <a href="#" style="color: #666; text-decoration: none; font-weight: 500;">Contact</a>
+        </nav>
     </header>
 
-   <main>
-        <section class="hero">
-            <div class="hero-content">
-                <span class="hero-tagline">🔥 Biggest Sale of the Year!</span>
-                <h1>Upgrade Your Style, <br>Simplify Your Shopping</h1>
-                <p>Discover exclusive weekly arrivals and premium collections tailored just for you. Enjoy free shipping on orders over $50!</p>
-                
-                <a href="#products" class="hero-btn">Shop New Arrivals <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </section>
-        <section class="products-section" id="products">
-        <h2 class="section-title">Featured Products</h2>
+    <div class="hero-section" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200') no-repeat center center/cover; padding: 100px 5%; text-align: center; color: white;">
+        <h1 style="font-size: 42px; margin-bottom: 15px;">Upgrade Your Style, Simplify Your Shopping</h1>
+        <p style="font-size: 18px; margin-bottom: 25px;">Discover exclusive weekly arrivals and premium collections tailored just for you.</p>
+        <button style="background: #ff5722; color: #fff; border: none; padding: 12px 25px; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold;">Shop New Arrivals →</button>
+    </div>
+
+    <main style="padding: 40px 5%;">
+        <h2 style="text-align: center; margin-bottom: 40px; font-size: 28px; color: #333;">Featured Products</h2>
         
-        <div class="product-grid" id="productGrid">
+        <div id="products-grid" class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px;">
             </div>
-    </section>
     </main>
 
     <script src="scripts/app.js"></script>
