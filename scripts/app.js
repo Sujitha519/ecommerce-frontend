@@ -20,40 +20,57 @@ menuToggle.addEventListener('click', () => {
 // PRODUCT GRID DOM FETCH LOGIC
 // ====================================================
 
+// ====================================================
+// SUBTASK 2: FETCH PRODUCT DATA FROM API WITH ROBUST HANDLING
+// ====================================================
+
 const productGrid = document.getElementById('productGrid');
 
-// 1. Function to talk to the live internet API
 async function fetchProducts() {
+    // 1. Show Loading State while the API request is in progress
+    productGrid.innerHTML = `
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p>Loading premium collection, please wait...</p>
+        </div>
+    `;
+
     try {
-        // Fetching 8 items from a public e-commerce test API
+        // Fetch data from the public FakeStore API endpoint
         const response = await fetch('https://fakestoreapi.com/products?limit=8');
         
+        // Check if server response is healthy
         if (!response.ok) {
-            throw new Error('Network response failure');
+            throw new Error(`Server returned status: ${response.status}`);
         }
         
         const products = await response.json();
         
-        // Send data off to get drawn on the screen
+        // 2. Clear loader and inject cards dynamically if successful
         displayProducts(products);
+
     } catch (error) {
-        console.error('Error fetching data:', error);
-        productGrid.innerHTML = `<p style="text-align:center; color:red;">Failed to load products. Please try again later.</p>`;
+        // 3. Handle Errors safely without breaking the user layout
+        console.error('API Fetch Error Log:', error);
+        productGrid.innerHTML = `
+            <div class="error-message">
+                <h3><i class="fa-solid fa-triangle-exclamation"></i> Something went wrong</h3>
+                <p>We're having trouble retrieving items right now. Please check your internet connection and try refreshing.</p>
+            </div>
+        `;
     }
 }
 
-// 2. Function to turn JavaScript arrays into visible HTML structures
 function displayProducts(productsArray) {
-    // Clear out any old placeholder code
-    productGrid.innerHTML = '';
+    productGrid.innerHTML = ''; // Wipe out loader component
 
-    // Loop through each individual product object
+    // 4. Loop through the API response array
     productsArray.forEach(product => {
-        // Create an empty div container for a card
         const card = document.createElement('div');
         card.classList.add('product-card');
 
-        // Populate card content dynamically with variables using backticks (``)
+        // Extract relevant details: title, price, image, etc.
+        // Added 'loading="lazy"' to optimize rendering speeds for mobile images
         card.innerHTML = `
             <div class="product-img-wrapper">
                 <img src="${product.image}" alt="${product.title}" loading="lazy">
@@ -65,10 +82,10 @@ function displayProducts(productsArray) {
             </div>
         `;
 
-        // Slide the fresh card box right into our layout grid
+        // Append structure cleanly to current grid layout block
         productGrid.appendChild(card);
     });
 }
 
-// 3. Trigger the data stream immediately when the window finishes loading
+// Trigger streaming pipeline once DOM tree parses completely
 window.addEventListener('DOMContentLoaded', fetchProducts);
