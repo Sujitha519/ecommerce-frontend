@@ -47,3 +47,35 @@ document.addEventListener('DOMContentLoaded', () => {
     syncHomepageBadgeText();
     displayStorefrontProducts();
 });
+// Copy this script initialization to your global application workflow or main page loaders
+// Make sure the same 2 Firebase CDN scripts from Step 1 are also loaded in your index.html/cart.html headers!
+
+const authStateTracker = firebase.auth();
+
+authStateTracker.onAuthStateChanged((user) => {
+    // Locate our navigation action holding wrapper
+    const navActions = document.querySelector('.nav-actions-container');
+    
+    if (navActions) {
+        if (user) {
+            // User is signed in -> Change the "Sign In" link to a functional "Logout" button dynamically!
+            navActions.innerHTML = `
+                <span style="font-size: 14px; color: #555; font-weight: 600;">Hi, ${user.email.split('@')[0]}</span>
+                <button id="logoutBtn" style="font-size: 15px; font-weight: 600; color: #e53935; background: none; border: 1px solid #e53935; padding: 8px 16px; border-radius: 4px; cursor: pointer; transition: all 0.2s;">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                </button>
+                <a href="./cart.html" style="font-size: 15px; font-weight: 600; color: #ff5722; text-decoration: none; border: 1px solid #ff5722; padding: 8px 16px; border-radius: 4px; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-basket-shopping"></i> My Cart (<span id="navCartBadge">0</span>)
+                </a>
+            `;
+            
+            // Attach real signOut click trigger action 
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                firebase.auth().signOut().then(() => {
+                    alert("Logged out successfully.");
+                    window.location.reload();
+                });
+            });
+        }
+    }
+});

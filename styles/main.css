@@ -817,3 +817,9 @@ body {
     text-align: center;
     min-width: 15px;
 }
+/* Smooth hover properties for our newly generated identity entry shortcut */
+.nav-actions-container a:first-child:hover {
+    background-color: #f5f5f5 !important;
+    border-color: #999 !important;
+    color: #ff5722 !important;
+}
