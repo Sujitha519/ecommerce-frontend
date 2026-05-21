@@ -526,3 +526,82 @@ body {
         flex-direction: column;
     }
 }
+/* ==================================================== */
+/* MODULE 3 SUBTASK 2: INTERACTIVE DETAIL UI            */
+/* ==================================================== */
+
+/* Image Zoom Setup */
+.detail-img-box {
+    overflow: hidden; /* Clips the image when it scales out */
+    cursor: zoom-in;
+}
+
+.detail-img-box img {
+    transition: transform 0.3s ease; /* Smooth enlargement animation */
+}
+
+/* Zooms the product image cleanly when a user mouse hovers */
+.detail-img-box:hover img {
+    transform: scale(1.4); 
+}
+
+/* Variant & Quantity Layout Selectors */
+.selector-item {
+    margin-bottom: 20px;
+}
+
+.selector-item label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #444;
+}
+
+.size-dropdown {
+    padding: 10px;
+    width: 150px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Quantity Box Counter layout grid */
+.quantity-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid #ccc;
+    width: fit-content;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.qty-btn {
+    background: #f5f5f5;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.qty-btn:hover {
+    background: #e0e0e0;
+}
+
+.qty-number {
+    width: 50px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    background: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
