@@ -1,6 +1,256 @@
 body {
+    background-color: #f8f9fa;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
+}
+/* Base Resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 15px 5%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.nav-logo a {
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #333;
+}
+.nav-logo span {
+    color: #ff5722; /* E-commerce accent color */
+}
+
+/* Search Bar Styling */
+.nav-search {
+    display: flex;
+    flex: 0 1 400px; /* Limits how wide it stretches */
+    margin: 0 20px;
+}
+.nav-search input {
+    width: 100%;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    outline: none;
+}
+.nav-search button {
+    padding: 8px 15px;
+    background-color: #ff5722;
+    border: 1px solid #ff5722;
+    color: white;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor: pointer;
+}
+
+/* Navigation Links */
+.nav-menu {
+    display: flex;
+    gap: 25px;
+}
+.nav-link {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+.nav-link:hover, .nav-linkactive {
+    color: #ff5722;
+}
+
+/* Right Side Icons (Cart & Toggle) */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cart-icon {
+    position: relative;
+    font-size: 22px;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Notification Badge */
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: #ff5722;
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+/* Hamburger button hidden by default on laptops */
+.menu-toggle {
+    display: none;
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+}
+
+/* ==================================================== */
+/* RESPONSIVE DESIGN (Mobile Layout)                  */
+/* ==================================================== */
+@media (max-width: 768px) {
+    /* Stack search bar or change flow if needed, or hide menu */
+    .menu-toggle {
+        display: block; /* Show hamburger button */
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 70px;
+        right: -100%; /* Hides menu off-screen to the right */
+        background-color: #ffffff;
+        width: 70%;
+        height: calc(100vh - 70px);
+        flex-direction: column;
+        align-items: center;
+        padding-top: 40px;
+        gap: 30px;
+        box-shadow: -2px 5px 5px rgba(0,0,0,0.1);
+        transition: right 0.4s ease; /* Slide animation */
+    }
+
+    /* When JavaScript adds the 'active' class, slide it out! */
+    .nav-menu.active {
+        right: 0;
+    }
+}
+/* ==================================================== */
+/* SUBTASK 2: HERO SECTION DESIGN                       */
+/* ==================================================== */
+
+.hero {
+    width: 100%;
+    min-height: 80vh; /* Takes up 80% of the screen height */
+    /* Deep premium dark background gradient mix */
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.9), rgba(40, 40, 40, 0.7)), 
+                url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1600') no-repeat center center/cover;
+    display: flex;
+    align-items: center; /* Centers content vertically */
+    padding: 0 5%;
+}
+
+.hero-content {
+    max-width: 650px;
+    color: #ffffff;
+    /* Basic Animation: Fades in smoothly when page loads */
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.hero-tagline {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ff5722; /* Matching navbar accent orange */
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #e0e0e0;
+    margin-bottom: 35px;
+}
+
+/* CTA Button Styling */
+.hero-btn {
+    display: inline-block;
+    padding: 14px 30px;
+    background-color: #ff5722;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+    transition: all 0.3s ease; /* Smooth hover transition */
+}
+
+/* Interactive Hover Effects */
+.hero-btn:hover {
+    background-color: #e64a19;
+    transform: translateY(-3px); /* Lifts button up slightly */
+    box-shadow: 0 6px 20px rgba(255, 87, 34, 0.5);
+}
+.hero-btn i {
+    margin-left: 8px;
+    transition: transform 0.3s;
+}
+.hero-btn:hover i {
+    transform: translateX(5px); /* Makes arrow slide forward slightly on hover */
+}
+
+/* Keyframe for Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================================================== */
+/* HERO RESPONSIVENESS (Mobile Layout)                 */
+/* ==================================================== */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 60vh;
+        text-align: center;
+        justify-content: center; /* Centers layout for mobile viewports */
+        padding: 40px 20px;
+    }
+
+    .hero h1 {
+        font-size: 32px; /* Smaller font so text doesn't overflow mobile width */
+    }
+
+    .hero p {
+        font-size: 15px;
+        margin-bottom: 25px;
+    }
+
+    .hero-btn {
+        width: 100%; /* Full-width easy-to-tap button on phones */
+        padding: 12px 20px;
+    }
 }
