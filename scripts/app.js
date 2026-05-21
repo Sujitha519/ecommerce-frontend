@@ -71,14 +71,17 @@ function displayProducts(productsArray) {
 
         // Extract relevant details: title, price, image, etc.
         // Added 'loading="lazy"' to optimize rendering speeds for mobile images
+       // Update ONLY the card.innerHTML inside displayProducts function in scripts/app.js
         card.innerHTML = `
             <div class="product-img-wrapper">
-                <img src="${product.image}" alt="${product.title}" loading="lazy">
+                <a href="product.html?id=${product.id}">
+                    <img src="${product.image}" alt="${product.title}" loading="lazy">
+                </a>
             </div>
             <div class="product-info">
-                <h3>${product.title}</h3>
+                <h3><a href="product.html?id=${product.id}" style="color: inherit; text-decoration: none;">${product.title}</a></h3>
                 <p class="product-price">$${product.price.toFixed(2)}</p>
-                <button class="add-to-cart-btn">Add to Cart</button>
+                <button class="add-to-cart-btn" onclick="globalAddToCart(${product.id})">Add to Cart</button>
             </div>
         `;
 
@@ -89,3 +92,14 @@ function displayProducts(productsArray) {
 
 // Trigger streaming pipeline once DOM tree parses completely
 window.addEventListener('DOMContentLoaded', fetchProducts);
+// Simple helper to manage cart sync on the main grid screen
+function globalAddToCart(id) {
+    let cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
+    cartCount += 1;
+    localStorage.setItem('cartCount', cartCount);
+    
+    // Update navbar count immediately if the element exists
+    const badge = document.querySelector('.cart-badge'); // Adjust class name to match your original navbar counter badge
+    if (badge) badge.textContent = cartCount;
+    alert('Item successfully added to your shopping cart!');
+}
