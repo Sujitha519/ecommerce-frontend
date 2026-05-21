@@ -254,3 +254,98 @@ body {
         padding: 12px 20px;
     }
 }
+/* ==================================================== */
+/* SUBTASK 3: DYNAMIC PRODUCT GRID                      */
+/* ==================================================== */
+
+.products-section {
+    padding: 60px 5%;
+    background-color: #f8f9fa;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #333;
+    font-weight: 700;
+}
+
+/* The Grid Container */
+.product-grid {
+    display: grid;
+    /* Automates matching 4 columns on desktop, shrinking gracefully */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px; /* Space between rows and columns */
+}
+
+/* Individual Product Cards */
+.product-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Card Hover Interactions */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Image Wrapper to ensure correct scaling without distortion */
+.product-img-wrapper {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.product-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Prevents stretching or squeezing the product photo */
+}
+
+/* Text details inside cards */
+.product-info h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    /* Limits title text to exactly 2 lines so everything stays uniform */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff5722; /* Store branding color */
+    margin-bottom: 15px;
+}
+
+/* Add to Cart CTA Button */
+.add-to-cart-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #ff5722; /* Turns orange on hover */
+}
