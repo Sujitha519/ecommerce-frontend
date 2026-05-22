@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Commerce Storefront</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.min.css">
 </head>
 <body>
 
@@ -27,11 +27,11 @@
 </div>
         </nav>
 
-        <nav class="nav-menu" style="padding: 10px 5%; background: #f8f9fa; display: flex; gap: 20px;">
-            <a href="index.html" style="color: #ff5722; text-decoration: none; font-weight: 600;">Home</a>
-            <a href="#" style="color: #666; text-decoration: none; font-weight: 500;">Products</a>
-            <a href="#" style="color: #666; text-decoration: none; font-weight: 500;">About</a>
-            <a href="#" style="color: #666; text-decoration: none; font-weight: 500;">Contact</a>
+        <nav class="nav-menu" style="padding: 10px 5px; background: #f8f9fa; display: flex; gap: 20px;">
+            <a href="index.html" style="color: #ff5722; text-decoration: none; font-weight: 500;">Home</a>
+            <a href="#products-grid" style="color: #666; text-decoration: none; font-weight: 500;">Products</a>
+            <a href="#about-us-section" style="color: #666; text-decoration: none; font-weight: 500;">About Us</a>
+            <a href="#contact-section" style="color: #666; text-decoration: none; font-weight: 500;">Contact</a>
         </nav>
     </header>
 
@@ -46,8 +46,19 @@
         
         <div id="products-grid" class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px;">
             </div>
-    </main>
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 50px 0;">
+        
+        <section id="about-us-section" style="padding: 20px; margin-bottom: 20px; background: #fafafa; border-radius: 8px;">
+            <h2 style="font-size: 22px; color: #333; margin-bottom: 10px;">About MyStore</h2>
+            <p style="color: #666; line-height: 1.6;">Welcome to MyStore! This platform represents a performance-optimized frontend e-commerce system featuring fluid responsive layouts, optimized asset delivery pipelines, and an intuitive user experience workflow.</p>
+        </section>
 
-    <script src="scripts/app.js"></script>
+        <section id="contact-section" style="padding: 20px; margin-bottom: 40px; background: #fafafa; border-radius: 8px;">
+            <h2 style="font-size: 22px; color: #333; margin-bottom: 10px;">Contact Support</h2>
+            <p style="color: #666; line-height: 1.6;">Have questions about your order or our premium collections? Reach out to our customer support team at <strong>support@mystore.com</strong>. We are available 24/7 to assist with your shopping configurations.</p>
+        </section>
+    </main>
+<script src="scripts/app.min.js"></script>
+<script src="scripts/app.min.js" defer></script>
 </body>
 </html>

@@ -21,6 +21,12 @@ function syncHomepageBadgeText() {
 }
 
 // 2. Loop through product listings arrays and construct clickable visual interface cards
+// ==========================================
+// 2. Loop through product listings arrays and construct clickable visuals
+// ==========================================
+// ==========================================
+// 2. Loop through product listings arrays and construct clickable visuals
+// ==========================================
 function displayStorefrontProducts() {
     const productsGrid = document.getElementById('products-grid');
     if (!productsGrid) return;
@@ -30,14 +36,21 @@ function displayStorefrontProducts() {
     sampleProductsList.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
-        productCard.style = "background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 6px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02);";
+        productCard.style = "background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);";
 
+        // Since we are using external web URLs, we pass the direct image URL safely.
+        // We include native loading="lazy" to perfectly fulfill Subtask 1's lazy loading constraint!
         productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-bottom: 15px;">
-            <h3 style="font-size: 16px; color: #333; margin-bottom: 10px; height: 40px; overflow: hidden;">${product.title}</h3>
-            <p style="color: #ff5722; font-weight: bold; font-size: 18px; margin-bottom: 15px;">$${product.price.toFixed(2)}</p>
-            <a href="./product.html?id=${product.id}" style="display: block; background: #333; color: white; text-decoration: none; padding: 10px; border-radius: 4px; font-weight: 600; font-size: 14px;">View Details</a>
+            <img src="${product.image}" 
+                 loading="lazy" 
+                 alt="${product.title}" 
+                 style="width: 100%; height: 200px; display: block; object-fit: cover; border-radius: 4px;"
+            />
+            <h3 style="font-size: 16px; color: #333; margin-top: 12px; margin-bottom: 10px;">${product.title}</h3>
+            <p style="color: #ff5722; font-weight: bold; font-size: 18px; margin-bottom: 10px;">$${product.price}</p>
+            <a href="./product.html?id=${product.id}" style="display: block; background: #333; color: #fff; text-align: center; padding: 8px; text-decoration: none; border-radius: 4px; font-size: 14px;">View Product</a>
         `;
+        
         productsGrid.appendChild(productCard);
     });
 }
@@ -79,3 +92,30 @@ authStateTracker.onAuthStateChanged((user) => {
         }
     }
 });
+// =========================================================
+// SUBTASK 1: OPTIMIZED IMAGE & ASSET GENERATION ENGINE
+// =========================================================
+/**
+ * Generates an optimized, responsive, lazy-loaded HTML image string.
+ * @param {string} baseImageName - The filename without extension (e.g., 'shoes')
+ * @param {string} altText - Description for accessibility
+ * @returns {string} Fully responsive HTML <img> tag
+ */
+function generateOptimizedImage(baseImageName, altText) {
+    // 1. Force the use of modern, lightweight .webp format
+    const smallImg  = `images/${baseImageName}-small.webp`;
+    const mediumImg = `images/${baseImageName}-medium.webp`;
+    const largeImg  = `images/${baseImageName}-large.webp`;
+    
+    // 2. Return a structurally responsive <img> element string
+    return `
+        <img src="${largeImg}" 
+             srcset="${smallImg} 480w, ${mediumImg} 800w, ${largeImg} 1200w"
+             sizes="(max-width: 600px) 480px, (max-width: 900px) 800px, 1200px"
+             loading="lazy" 
+             alt="${altText}"
+             class="product-card-img" 
+             style="width: 100%; height: auto; display: block; object-fit: cover;"
+        />
+    `.trim();
+}
